@@ -36,4 +36,20 @@ describe('GetUserService', () => {
       expect(repositoryMock.findOne).toBeCalled();
     });
   });
+
+  describe('getByUserName', () => {
+    it('should find user by id', async () => {
+      const user: User = {
+        userId: '123123123',
+        userName: 'elvex10',
+        hashPassword:
+          '$2a$10$HUWM5RrhkPtm42s1tM5wKeESDyZg0soqAbdcuHOyJaLzh6A2yNU2e',
+      };
+      jest.spyOn(repositoryMock, 'findOne').mockResolvedValueOnce(user);
+      expect(await service.getByUserName(user.userName)).toEqual(user);
+      expect(repositoryMock.findOne).toBeCalledWith({
+        where: { userName: user.userName },
+      });
+    });
+  });
 });

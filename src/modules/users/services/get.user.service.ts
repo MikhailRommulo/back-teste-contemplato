@@ -13,4 +13,8 @@ export class GetUserServiceImpl implements GetUserService {
   async getById(id: string): Promise<User | undefined> {
     return this.usersRepository.findOne({ where: { userId: id } });
   }
+
+  async getByUserName(userName: string): Promise<User | undefined> {
+    return this.usersRepository.findOne({ where: { userName } });
+  }
 }
